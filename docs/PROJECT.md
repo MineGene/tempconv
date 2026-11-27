@@ -65,7 +65,8 @@ No spend outside the existing subscription; the Claude workflows are blocked bec
 
 ## Defaults and assumptions
 
-- DEFAULT: branch main; MIT licence; one unit test per behaviour; stack-standard tools; .env secrets; local-only environments; branch rules as in the kit; automation is PR review plus @claude; no spend outside the existing subscription; the Claude workflows are blocked because setup-token needs a local CLI.
+- DEFAULT: branch main; MIT licence; one unit test per behaviour; stack-standard tools; .env secrets; local-only environments; branch rules as in the kit; automation is PR review plus @claude.
+- ASSUMPTION: no spend outside the existing subscription; the Claude workflows are blocked because setup-token needs a local CLI.
 - ASSUMPTION: owner is MineGene; runs locally; no deadline; one person, 0 approvals; Vitest, ESLint, Prettier and tsx as the toolchain; nothing else off-limits.
 - ASSUMPTION: `--help` is recognised only as the first argument, before the argument validation; it prints a usage line and the units to stdout and exits with code 0, and any extra arguments after it are ignored (issue #5).
 - ASSUMPTION: a missing argument, such as `tempconv 100 C`, prints an error to stderr and exits with code 1 (issue #4).
