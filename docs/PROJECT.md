@@ -43,6 +43,7 @@ Dedicated Console workspace with a US$20 monthly limit. One person. Chat for pla
 
 - 2026-11-27: Kit dry run covers stages 0 to 8 because the handoff says so.
 - 2026-11-27: Stage 2 was merged as PR #1, not committed straight to main, because Claude Code opened a PR.
+- 2026-11-27: Output is the number rounded to 10 decimal places with trailing zeros dropped and `-0` shown as `0`, so float noise such as `273.24999999999997` does not print. Units are uppercase only (`C`, `F`, `K`). Conversion lives in `src/cli.ts` (issue #3).
 
 ## Deviations from the kit
 

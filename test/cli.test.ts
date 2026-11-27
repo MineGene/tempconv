@@ -1,8 +1,44 @@
-import { describe, expect, it } from "vitest";
-import { main } from "../src/cli.js";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { convert, formatNumber, main } from "../src/cli.js";
+
+describe("convert", () => {
+  it.each([
+    [100, "C", "F", 212],
+    [0, "C", "K", 273.15],
+    [32, "F", "C", 0],
+    [100, "C", "C", 100],
+    [212, "F", "K", 373.15],
+    [273.15, "K", "C", 0],
+    [-40, "C", "F", -40],
+  ] as const)("converts %s %s to %s as %s", (value, from, to, expected) => {
+    expect(convert(value, from, to)).toBeCloseTo(expected, 10);
+  });
+});
+
+describe("formatNumber", () => {
+  it("formats whole and decimal numbers", () => {
+    expect(formatNumber(212)).toBe("212");
+    expect(formatNumber(273.15)).toBe("273.15");
+  });
+
+  it("prints negative zero as 0", () => {
+    expect(formatNumber(-0)).toBe("0");
+  });
+
+  it("rounds away floating point noise", () => {
+    expect(formatNumber(convert(98.6, "F", "C"))).toBe("37");
+    expect(formatNumber(convert(0.1, "C", "K"))).toBe("273.25");
+  });
+});
 
 describe("main", () => {
-  it("exits with code 0", () => {
-    expect(main([])).toBe(0);
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  it("logs the converted value and returns 0", () => {
+    const log = vi.spyOn(console, "log").mockImplementation(() => {});
+    expect(main(["100", "C", "F"])).toBe(0);
+    expect(log).toHaveBeenCalledWith("212");
   });
 });
