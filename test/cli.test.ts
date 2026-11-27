@@ -47,4 +47,25 @@ describe("main", () => {
     expect(main(["100", "C", "C"])).toBe(0);
     expect(log).toHaveBeenCalledWith("100");
   });
+
+  describe("invalid input", () => {
+    it.each([
+      ["an unknown unit", ["100", "C", "X"]],
+      ["a lowercase unit", ["100", "c", "f"]],
+      ["a non-numeric value", ["abc", "C", "F"]],
+      ["an empty value", ["", "C", "F"]],
+      ["a whitespace-only value", ["  ", "C", "F"]],
+      ["a non-finite value", ["Infinity", "C", "F"]],
+      ["a value that overflows when converted", ["1e308", "C", "F"]],
+      ["a missing argument", ["100", "C"]],
+      ["no arguments", []],
+      ["an extra argument", ["100", "C", "F", "K"]],
+    ])("prints an error to stderr and returns 1 for %s", (_name, argv) => {
+      const log = vi.spyOn(console, "log").mockImplementation(() => {});
+      const error = vi.spyOn(console, "error").mockImplementation(() => {});
+      expect(main(argv)).toBe(1);
+      expect(error).toHaveBeenCalledTimes(1);
+      expect(log).not.toHaveBeenCalled();
+    });
+  });
 });

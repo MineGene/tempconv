@@ -44,6 +44,8 @@ Dedicated Console workspace with a US$20 monthly limit. One person. Chat for pla
 - 2026-11-27: Kit dry run covers stages 0 to 8 because the handoff says so.
 - 2026-11-27: Stage 2 was merged as PR #1, not committed straight to main, because Claude Code opened a PR.
 - 2026-11-27: Output is the number rounded to 10 decimal places with trailing zeros dropped and `-0` shown as `0`, so float noise such as `273.24999999999997` does not print. Units are uppercase only (`C`, `F`, `K`). Conversion lives in `src/cli.ts` (issue #3).
+- 2026-11-27: Input validation (issue #4). `main` requires exactly three arguments. Units are uppercase only (`C`, `F`, `K`). The value must pass `Number()` and be finite, so hex, binary, octal, exponent and padded-whitespace forms are accepted, and an empty or whitespace-only value is rejected. A result that overflows to infinity (for example `1e308 C F`) is rejected. Every failure prints one generic message to stderr, exits with code 1 and prints nothing to stdout.
+- 2026-11-27: Accepted for this throwaway, from the issue #4 security review (low severity): hex, binary and octal literals are accepted; exponent forms have no upper bound beyond the overflow check; values below absolute zero are accepted; padded whitespace, `+5` and `.5` are accepted; one generic error message covers every failure.
 
 ## Deviations from the kit
 

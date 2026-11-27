@@ -27,9 +27,33 @@ export function formatNumber(n: number): string {
   return String(Number(n.toFixed(10)) + 0);
 }
 
+function isUnit(s: string): s is Unit {
+  return s === "C" || s === "F" || s === "K";
+}
+
 export function main(argv: string[]): number {
   const [value, from, to] = argv;
-  console.log(formatNumber(convert(Number(value), from as Unit, to as Unit)));
+  const usage = "Invalid input. Usage: tempconv <value> <C|F|K> <C|F|K>";
+  if (
+    argv.length !== 3 ||
+    value === undefined ||
+    from === undefined ||
+    to === undefined ||
+    value.trim() === "" ||
+    !Number.isFinite(Number(value)) ||
+    !isUnit(from) ||
+    !isUnit(to)
+  ) {
+    console.error(usage);
+    return 1;
+  }
+  const result = convert(Number(value), from, to);
+  if (!Number.isFinite(result)) {
+    // A huge finite value can overflow during conversion.
+    console.error(usage);
+    return 1;
+  }
+  console.log(formatNumber(result));
   return 0;
 }
 
