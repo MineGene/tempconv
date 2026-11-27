@@ -56,6 +56,7 @@ describe("main", () => {
       ["an empty value", ["", "C", "F"]],
       ["a whitespace-only value", ["  ", "C", "F"]],
       ["a non-finite value", ["Infinity", "C", "F"]],
+      ["a value that overflows when converted", ["1e308", "C", "F"]],
       ["a missing argument", ["100", "C"]],
       ["no arguments", []],
       ["an extra argument", ["100", "C", "F", "K"]],
