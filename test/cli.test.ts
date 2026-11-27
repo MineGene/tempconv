@@ -48,6 +48,27 @@ describe("main", () => {
     expect(log).toHaveBeenCalledWith("100");
   });
 
+  it("prints usage to stdout and returns 0 for --help", () => {
+    const log = vi.spyOn(console, "log").mockImplementation(() => {});
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    expect(main(["--help"])).toBe(0);
+    expect(error).not.toHaveBeenCalled();
+    expect(log).toHaveBeenCalledTimes(1);
+    const text = String(log.mock.calls[0]?.[0]);
+    expect(text).toContain("tempconv <value> <from> <to>");
+    for (const unit of ["C", "F", "K"]) {
+      expect(text).toMatch(new RegExp(`\\b${unit}\\b`));
+    }
+  });
+
+  it("handles --help as the first argument before validation", () => {
+    const log = vi.spyOn(console, "log").mockImplementation(() => {});
+    const error = vi.spyOn(console, "error").mockImplementation(() => {});
+    expect(main(["--help", "extra"])).toBe(0);
+    expect(error).not.toHaveBeenCalled();
+    expect(log).toHaveBeenCalledTimes(1);
+  });
+
   describe("invalid input", () => {
     it.each([
       ["an unknown unit", ["100", "C", "X"]],
