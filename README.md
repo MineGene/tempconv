@@ -2,6 +2,8 @@
 
 A small temperature conversion CLI, written in TypeScript.
 
+Project facts: [docs/PROJECT.md](docs/PROJECT.md). Rules for Claude: [CLAUDE.md](CLAUDE.md).
+
 ## Requirements
 
 Node.js LTS (see `.nvmrc`) and npm.
