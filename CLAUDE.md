@@ -26,6 +26,7 @@ A tiny TypeScript CLI that converts a temperature between Celsius, Fahrenheit an
 ## Workflow
 
 - Work on a branch named `claude/<short-topic>`. Never commit to `main`.
+- In a fresh checkout, run the install command first.
 - Plan first with the `planner` agent for a new feature or a change touching more than 3 files.
   Show the plan and wait for approval if it touches more than 5 files.
 - Done means test, lint and type check all pass. Say which ran.
