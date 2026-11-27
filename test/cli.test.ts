@@ -41,4 +41,10 @@ describe("main", () => {
     expect(main(["100", "C", "F"])).toBe(0);
     expect(log).toHaveBeenCalledWith("212");
   });
+
+  it("prints the value unchanged when the units match", () => {
+    const log = vi.spyOn(console, "log").mockImplementation(() => {});
+    expect(main(["100", "C", "C"])).toBe(0);
+    expect(log).toHaveBeenCalledWith("100");
+  });
 });
