@@ -64,3 +64,5 @@ Dedicated Console workspace with a US$20 monthly limit. One person. Chat for pla
 
 - DEFAULT: branch main; MIT licence; one unit test per behaviour; stack-standard tools; .env secrets; local-only environments; branch rules as in the kit; automation is PR review plus @claude; API key with a US$20 limit.
 - ASSUMPTION: owner is MineGene; runs locally; no deadline; one person, 0 approvals; Vitest, ESLint, Prettier and tsx as the toolchain; nothing else off-limits.
+- ASSUMPTION: a missing argument, such as `tempconv 100 C`, prints an error to stderr and exits with code 1 (issue #4).
+- ASSUMPTION: converting a unit to itself, such as `100 C C`, prints the value unchanged (issue #3).
