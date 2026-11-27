@@ -32,6 +32,15 @@ function isUnit(s: string): s is Unit {
 }
 
 export function main(argv: string[]): number {
+  if (argv[0] === "--help") {
+    console.log(
+      [
+        "Usage: tempconv <value> <from> <to>",
+        "Units: C (Celsius), F (Fahrenheit), K (Kelvin)",
+      ].join("\n"),
+    );
+    return 0;
+  }
   const [value, from, to] = argv;
   const usage = "Invalid input. Usage: tempconv <value> <C|F|K> <C|F|K>";
   if (
