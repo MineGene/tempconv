@@ -2,9 +2,18 @@
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "permissions": {
     "allow": [
+      "Edit(/src/**)",
+      "Edit(/test/**)",
+      "Edit(/docs/**)",
+      "Bash(npm test)",
       "Bash(npm test *)",
+      "Bash(npm run lint)",
       "Bash(npm run lint *)",
+      "Bash(npm run format)",
       "Bash(npm run format *)",
+      "Bash(npm run format:check)",
+      "Bash(npm run format:check *)",
+      "Bash(npm run typecheck)",
       "Bash(npm run typecheck *)",
       "Bash(git status *)",
       "Bash(git diff *)",
@@ -19,7 +28,12 @@
       "Bash(gh pr view *)",
       "Bash(gh pr diff *)"
     ],
-    "ask": ["Bash(git push *)", "Bash(gh pr create *)", "Bash(npm ci *)"],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(gh pr create *)",
+      "Bash(npm ci *)",
+      "Bash(npm ci)"
+    ],
     "deny": [
       "Read(./.env)",
       "Read(./.env.*)",
@@ -32,5 +46,10 @@
       "Bash(curl *)",
       "Bash(wget *)"
     ]
+  },
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
   }
 }
